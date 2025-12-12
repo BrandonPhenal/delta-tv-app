@@ -1,0 +1,27 @@
+.main-content-area {
+  opacity: 1;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-content-area.fading {
+  opacity: 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+/* This is a new container to wrap the main content for better layout control */
+.main-app-container {
+  max-width: 1800px;
+  margin: 0 auto;
+}

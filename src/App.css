@@ -1,0 +1,54 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #1a1a1a;
+}
+
+main {
+  flex-grow: 1;
+  overflow-y: auto; /* Allows the content area to scroll */
+}
+
+/* --- Professional Footer --- */
+.app-footer {
+  padding: 1.5rem 2rem;
+  background-color: #0d1b2a;
+  border-top: 1px solid #1f2937;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.copyright-text {
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.social-links a {
+  color: #a0aec0;
+  transition: color 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+  color: #00AEEF;
+}
+
+/* Responsive stacking for small screens */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
