@@ -1,21 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from './Logo';
-import './Header.css';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 const Header = ({ onSelectLive, isLive }) => {
+  const { isAuthenticated } = useAuth(); // Get isAuthenticated from context
+
   return (
-    <header className="app-header">
-      <Link to="/" className="logo-link">
-        <Logo />
+    <header className="header">
+      <Link to="/" className="logo">
+        Delta TV Uganda
+        <span style={{ fontSize: '0.6em', display: 'block', fontWeight: 'normal', textDecoration: 'underline' }}>tukole</span>
       </Link>
-      <nav className="navigation">
-        <button 
-          onClick={onSelectLive} 
-          className={`nav-button ${isLive ? 'active' : ''}`}
+      <nav className="main-nav">
+        <a 
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onSelectLive();
+          }}
+          className={isLive ? 'active' : ''}
         >
           Live TV
-        </button>
+        </a>
+        {isAuthenticated && <Link to="/admin">Admin</Link>}
       </nav>
     </header>
   );

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import './MainApp.css';
 import Header from '../components/Header';
 import VideoPlayer from '../components/VideoPlayer';
 import CatchUp from '../components/CatchUp';
+import Partners from '../components/Partners'; // Import the Partners component
 
 function MainApp({ shows, liveStream }) {
   const [featuredContent, setFeaturedContent] = useState(null);
@@ -42,24 +42,25 @@ function MainApp({ shows, liveStream }) {
   };
   
   useEffect(() => {
-    selectLive(true);
-  }, []);
+    if (liveStream) {
+      selectLive(true);
+    }
+  }, [liveStream]);
 
   return (
-    <div className="main-app-container">
+    <div className="main-content">
       <Header onSelectLive={() => selectLive(false)} isLive={isLive} />
-      <main className={`main-content-area ${isFading ? 'fading' : ''}`}>
-        <div className="content-grid">
-          <div className="featured-section">
-            <VideoPlayer 
-              video={featuredContent} 
-              playing={isPlaying} 
-              muted={isMuted} 
-            />
-          </div>
-          <div className="content-area">
-            <CatchUp shows={shows} onSelectShow={selectShow} />
-          </div>
+      <main className={`content-grid ${isFading ? 'fading' : ''}`}>
+        <div className="featured-section">
+          <VideoPlayer 
+            video={featuredContent} 
+            playing={isPlaying} 
+            muted={isMuted} 
+          />
+        </div>
+        <div className="content-area">
+          <CatchUp shows={shows} onSelectShow={selectShow} />
+          <Partners /> {/* Add the Partners component here */}
         </div>
       </main>
     </div>

@@ -1,0 +1,177 @@
+{
+  "shows": [
+    {
+      "id": 1,
+      "title": "Morning Breeze",
+      "description": "The early morning show that gets you ready for the day.",
+      "thumbnailUrl": "https://picsum.photos/seed/mb/400/225",
+      "videoUrl": "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8",
+      "views": 1850,
+      "schedule": [
+        { "day": "Monday", "time": "06:00" },
+        { "day": "Tuesday", "time": "06:00" },
+        { "day": "Wednesday", "time": "06:00" },
+        { "day": "Thursday", "time": "06:00" },
+        { "day": "Friday", "time": "06:00" }
+      ],
+      "isCatchUp": true
+    },
+    {
+      "id": 2,
+      "title": "Delta News Hour",
+      "description": "The biggest stories from around the nation, presented in detail.",
+      "thumbnailUrl": "https://picsum.photos/seed/dnh/400/225",
+      "videoUrl": "http://playertest.longtailvideo.com/adaptive/wowzaid3/playlist.m3u8",
+      "views": 3200,
+      "schedule": [
+        { "day": "Monday", "time": "18:00" },
+        { "day": "Tuesday", "time": "18:00" },
+        { "day": "Wednesday", "time": "18:00" },
+        { "day": "Thursday", "time": "18:00" },
+        { "day": "Friday", "time": "18:00" },
+        { "day": "Saturday", "time": "18:00" },
+        { "day": "Sunday", "time": "18:00" }
+      ],
+      "isCatchUp": true
+    },
+    {
+      "id": 3,
+      "title": "Gospel Vibes",
+      "description": "A selection of the best gospel music videos.",
+      "thumbnailUrl": "https://picsum.photos/seed/gv/400/225",
+      "videoUrl": "http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8",
+      "views": 2500,
+      "schedule": [
+        { "day": "Sunday", "time": "10:00" },
+        { "day": "Wednesday", "time": "14:00" }
+      ],
+      "isCatchUp": true
+    },
+    {
+      "id": 4,
+      "title": "Youth Pulse",
+      "description": "A show for the youth, by the youth.",
+      "thumbnailUrl": "https://picsum.photos/seed/yp/400/225",
+      "videoUrl": "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
+      "views": 1200,
+      "schedule": [
+        { "day": "Saturday", "time": "16:00" }
+      ],
+      "isCatchUp": true
+    },
+    {
+      "id": 5,
+      "title": "Late Night Talk",
+      "description": "Winding down the day with engaging conversations.",
+      "thumbnailUrl": "https://picsum.photos/seed/lnt/400/225",
+      "videoUrl": "https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8",
+      "views": 980,
+      "schedule": [
+        { "day": "Monday", "time": "22:00" },
+        { "day": "Tuesday", "time": "22:00" },
+        { "day": "Wednesday", "time": "22:00" },
+        { "day": "Thursday", "time": "22:00" },
+        { "day": "Friday", "time": "22:00" }
+      ],
+      "isCatchUp": true
+    },
+    {
+      "id": 6,
+      "title": "Sports Arena",
+      "description": "The latest in local and international sports.",
+      "thumbnailUrl": "https://picsum.photos/seed/sa/400/225",
+      "videoUrl": "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+      "views": 2100,
+      "schedule": [
+        { "day": "Saturday", "time": "20:00" },
+        { "day": "Sunday", "time": "20:00" }
+      ],
+      "isCatchUp": true
+    }
+  ],
+  "liveStream": {
+    "title": "Live TV",
+    "url": "https://siloh-nslplutotv.net/lilo/production/bein/master.m3u8",
+    "liveViewers": 480
+  },
+  "peakHours": [
+    { "hour": "00:00", "viewers": 150 },
+    { "hour": "01:00", "viewers": 120 },
+    { "hour": "02:00", "viewers": 100 },
+    { "hour": "03:00", "viewers": 90 },
+    { "hour": "04:00", "viewers": 110 },
+    { "hour": "05:00", "viewers": 200 },
+    { "hour": "06:00", "viewers": 450 },
+    { "hour": "07:00", "viewers": 600 },
+    { "hour": "08:00", "viewers": 550 },
+    { "hour": "09:00", "viewers": 400 },
+    { "hour": "10:00", "viewers": 350 },
+    { "hour": "11:00", "viewers": 380 },
+    { "hour": "12:00", "viewers": 500 },
+    { "hour": "13:00", "viewers": 520 },
+    { "hour": "14:00", "viewers": 480 },
+    { "hour": "15:00", "viewers": 450 },
+    { "hour": "16:00", "viewers": 600 },
+    { "hour": "17:00", "viewers": 750 },
+    { "hour": "18:00", "viewers": 900 },
+    { "hour": "19:00", "viewers": 1200 },
+    { "hour": "20:00", "viewers": 1100 },
+    { "hour": "21:00", "viewers": 950 },
+    { "hour": "22:00", "viewers": 700 },
+    { "hour": "23:00", "viewers": 400 }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "New Show Alert: 'Tech Trends' Premieres Next Week!",
+      "date": "2025-12-10"
+    },
+    {
+      "id": 2,
+      "title": "Holiday Programming Schedule Announced",
+      "date": "2025-12-05"
+    },
+    {
+      "id": 3,
+      "title": "Delta TV App Update: Improved Performance",
+      "date": "2025-11-28"
+    },
+    {
+      "id": 4,
+      "title": "Special Live Event: Charity Marathon This Weekend!",
+      "date": "2025-12-12"
+    }
+  ],
+  "partners": [
+    {
+      "id": 1,
+      "name": "Innovate Corp",
+      "logoUrl": "https://logowik.com/content/uploads/images/innovate-uk-new1476.logowik.com.webp",
+      "website": "https://innovatecorp.com"
+    },
+    {
+      "id": 2,
+      "name": "Global Connect",
+      "logoUrl": "https://logowik.com/content/uploads/images/global-connect-alliance9541.logowik.com.webp",
+      "website": "https://globalconnect.com"
+    },
+    {
+      "id": 3,
+      "name": "Creative Minds Agency",
+      "logoUrl": "https://logowik.com/content/uploads/images/creative-agency9489.logowik.com.webp",
+      "website": "https://creativeminds.com"
+    },
+    {
+      "id": 4,
+      "name": "Future Solutions",
+      "logoUrl": "https://logowik.com/content/uploads/images/future-smart-solutions9105.logowik.com.webp",
+      "website": "https://futuresolutions.com"
+    },
+    {
+      "id": 5,
+      "name": "Eco Ventures",
+      "logoUrl": "https://logowik.com/default_logo.jpg",
+      "website": "https://ecoventures.com"
+    }
+  ]
+}

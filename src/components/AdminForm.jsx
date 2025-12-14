@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './AdminForm.css';
 
 const AdminForm = ({ onAddShow }) => {
   const [title, setTitle] = useState('');
@@ -12,7 +11,7 @@ const AdminForm = ({ onAddShow }) => {
       alert('Please fill out all fields.');
       return;
     }
-    onAddShow({ title, videoUrl, thumbnailUrl });
+    onAddShow({ title, videoUrl, thumbnailUrl, isCatchUp: true, views: 0 });
     setTitle('');
     setVideoUrl('');
     setThumbnailUrl('');
@@ -21,26 +20,41 @@ const AdminForm = ({ onAddShow }) => {
   return (
     <div className="admin-form-container">
       <h3>Add New Show</h3>
-      <form onSubmit={handleSubmit} className="admin-form">
-        <input
-          type="text"
-          placeholder="Show Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Video URL"
-          value={videoUrl}
-          onChange={(e) => setVideoUrl(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Thumbnail URL"
-          value={thumbnailUrl}
-          onChange={(e) => setThumbnailUrl(e.target.value)}
-        />
-        <button type="submit">Add Show</button>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="title">Show Title</label>
+          <input
+            id="title"
+            className="form-control"
+            type="text"
+            placeholder="e.g., Late Night News"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="videoUrl">Video URL</label>
+          <input
+            id="videoUrl"
+            className="form-control"
+            type="text"
+            placeholder="e.g., https://example.com/video.mp4"
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="thumbnailUrl">Thumbnail URL</label>
+          <input
+            id="thumbnailUrl"
+            className="form-control"
+            type="text"
+            placeholder="e.g., https://example.com/thumb.jpg"
+            value={thumbnailUrl}
+            onChange={(e) => setThumbnailUrl(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">Add Show</button>
       </form>
     </div>
   );

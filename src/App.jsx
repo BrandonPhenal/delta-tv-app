@@ -1,25 +1,62 @@
-import { useState } from 'react';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MainApp from './pages/MainApp';
 import AdminLayout from './pages/AdminLayout';
 import Dashboard from './pages/Dashboard';
 import ShowsManager from './pages/ShowsManager';
+import PartnersManager from './pages/PartnersManager'; // Import PartnersManager
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { shows as initialShows, liveStream } from './shows';
+import { AuthProvider } from './context/AuthContext';
+import Footer from './components/Footer'; // Import the Footer component
 
 function App() {
-  const [shows, setShows] = useState(initialShows);
+  const [shows, setShows] = useState([]);
+  const [liveStream, setLiveStream] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/shows')
+      .then(res => res.json())
+      .then(data => setShows(data));
+    
+    fetch('http://localhost:3001/liveStream')
+      .then(res => res.json())
+      .then(data => setLiveStream(data));
+  }, []);
 
   const addShow = (newShow) => {
-    const showWithId = { ...newShow, id: Date.now() };
-    setShows(prevShows => [showWithId, ...prevShows]);
+    fetch('http://localhost:3001/shows', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newShow),
+    })
+      .then(res => res.json())
+      .then(data => setShows(prevShows => [data, ...prevShows]));
   };
 
   const deleteShow = (showId) => {
-    setShows(prevShows => prevShows.filter(show => show.id !== showId));
+    fetch(`http://localhost:3001/shows/${showId}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setShows(prevShows => prevShows.filter(show => show.id !== showId));
+      });
+  };
+
+  const onUpdateShow = (updatedShow) => {
+    fetch(`http://localhost:3001/shows/${updatedShow.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedShow),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setShows(prevShows => prevShows.map(show => show.id === data.id ? data : show));
+      });
   };
 
   return (
@@ -43,52 +80,14 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route 
               path="shows" 
-              element={<ShowsManager shows={shows} onAddShow={addShow} onDeleteShow={deleteShow} />} 
+              element={<ShowsManager shows={shows} onAddShow={addShow} onUpdateShow={onUpdateShow} onDeleteShow={deleteShow} />} 
             />
+            <Route path="partners" element={<PartnersManager />} /> {/* Add PartnersManager route */}
           </Route>
         </Routes>
-        <AppFooter />
+        <Footer /> 
       </div>
     </AuthProvider>
-  );
-}
-
-function AppFooter() {
-  const { isAuthenticated } = useAuth();
-  const currentYear = new Date().getFullYear();
-
-  if (isAuthenticated) {
-    return null;
-  }
-
-  return (
-    <footer className="app-footer">
-      <div className="footer-content">
-        <span className="copyright-text">
-          &copy; {currentYear} Delta TV Uganda. All Rights Reserved.
-        </span>
-        <div className="social-links">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#1DA1F2"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616v.064c0 2.298 1.634 4.212 3.791 4.649-.469.128-.962.192-1.465.192-.423 0-.82-.041-1.205-.118.63 1.879 2.449 3.243 4.604 3.28-1.623 1.274-3.66 2.031-5.876 2.031-.381 0-.756-.023-1.123-.066 2.099 1.353 4.604 2.144 7.29 2.144 8.749 0 13.529-7.252 13.529-13.529 0-.206-.005-.412-.013-.617.928-.67 1.733-1.512 2.37-2.464z"/></svg>
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FF0000"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 5.83-.25 2.01-1.04 2.8-2.1 2.88-.13.03-.6.04-1.3.04-1.1.02-2.3.02-3.6.02h-2c-1.3 0-2.5 0-3.6-.02-1.1 0-2-.02-2.3-.03-.13-.01-.6-.03-1.3-.04-1.06-.08-1.85-.87-2.1-2.88-.28-2.03-.44-3.64-.44-5.83l.01-1.11c0-.6.03-1.29.1-2.09.06-.8.15-1.43.28-1.9.23-1.7 1.1-2.5 2.6-2.5.6-.01 1.2-.02 2.1-.02 1.6 0 3.3.01 4.8.02.5.01 1 .02 1.3.02.1.01.4.01.6.01.6 0 1.2.01 1.8.01 1.5.02 2.37.8 2.6 2.51z"/></svg>
-          </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#1877F2"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-          </a>
-          {/* WhatsApp icon */}
-          <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <g>
-                <circle cx="12" cy="12" r="12" fill="#FFFFFF"/>
-                <path fill="#25D366" d="M17.472 14.42c-.297-.149-1.758-.867-2.03-.967-.273-.099-.47-.148-.67.15-.2.295-.767.966-.94 1.166-.173.199-.347.223-.644.075-.297-.149-1.056-.387-2-1.23-.748-.654-1.243-1.465-1.38-1.71-.137-.245-.01-.377.106-.484.096-.095.228-.243.342-.364.113-.12.158-.22.25-.378.092-.158.046-.299-.023-.448-.067-.148-.663-1.612-.91-2.207-.234-.576-.47-.498-.67-.51-.2-.01-.433-.004-.666-.004-.233 0-.618.086-.943.433-.324.344-1.23 1.12-1.23 2.748 0 1.627 1.267 3.175 1.44 3.42.174.246 2.41 3.694 5.82 5.16.897.399 1.592.637 2.132.81.823.272 1.564.232 2.127.144.47-.074 1.49-.607 1.7-.118.21.498.21 1.096.143 1.298-.065.2-.239.3-.473.348-.233.047-.56.247-.792.247h-.002c-.326 0-.853-.114-1.612-.472-1.267-.617-2.983-1.618-3.791-2.067z"/>
-              </g>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </footer>
   );
 }
 
