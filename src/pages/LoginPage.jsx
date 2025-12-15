@@ -69,10 +69,23 @@ const LoginPage = () => {
                     border: 'none',
                     cursor: 'pointer',
                     padding: '0',
-                    color: '#007bff'
+                    color: '#94a3b8', // Changed color for better integration with the theme
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                   }}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-eye-off">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.06 18.06 0 0 1 4.72-5.74M9.91 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.93 4.46M12 16a4 4 0 0 1-4-4m0-4a4 4 0 0 1 4-4c.94 0 1.83.2 2.63.59M14.63 9.37A4 4 0 0 1 12 16M1 1l23 23"></path>
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-eye">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  )}
                 </button>
               </div>
             </div>
