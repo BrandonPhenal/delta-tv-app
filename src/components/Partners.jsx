@@ -4,9 +4,9 @@ const Partners = () => {
   const [partners, setPartners] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/partners')
+    fetch('/db.json')
       .then(res => res.json())
-      .then(data => setPartners(data));
+      .then(data => setPartners(data.partners));
   }, []);
 
   return (

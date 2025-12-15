@@ -5,9 +5,9 @@ const PeakHoursChart = () => {
   const [peakHoursData, setPeakHoursData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/peakHours')
+    fetch('/db.json')
       .then(res => res.json())
-      .then(data => setPeakHoursData(data));
+      .then(data => setPeakHoursData(data.peakHours));
   }, []);
 
   return (

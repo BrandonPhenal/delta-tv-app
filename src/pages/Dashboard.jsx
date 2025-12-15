@@ -18,20 +18,12 @@ const Dashboard = () => {
   const [liveStream, setLiveStream] = useState({ liveViewers: 0 });
 
   useEffect(() => {
-    fetch('http://localhost:3001/shows')
+    fetch('/db.json')
       .then(res => res.json())
-      .then(data => setShows(data));
-    
-    const fetchLiveViewers = () => {
-      fetch('http://localhost:3001/liveStream')
-        .then(res => res.json())
-        .then(data => setLiveStream(data));
-    };
-
-    fetchLiveViewers();
-    const interval = setInterval(fetchLiveViewers, 5000); // Refresh every 5 seconds
-
-    return () => clearInterval(interval);
+      .then(data => {
+        setShows(data.shows);
+        setLiveStream(data.liveStream);
+      });
   }, []);
 
   const totalVODViews = shows.reduce((acc, show) => acc + show.views, 0);

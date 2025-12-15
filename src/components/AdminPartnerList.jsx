@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminPartnerList = ({ partners, onDeletePartner }) => {
+const AdminPartnerList = ({ partners }) => {
   return (
     <div className="admin-list-container">
       <h3>Existing Partners</h3>
@@ -10,7 +10,6 @@ const AdminPartnerList = ({ partners, onDeletePartner }) => {
             <th>Logo</th>
             <th>Name</th>
             <th>Website</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -21,11 +20,6 @@ const AdminPartnerList = ({ partners, onDeletePartner }) => {
               </td>
               <td>{partner.name}</td>
               <td><a href={partner.website} target="_blank" rel="noopener noreferrer">{partner.website}</a></td>
-              <td>
-                <button onClick={() => onDeletePartner(partner.id)} className="btn btn-danger">
-                  Delete
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>

@@ -4,9 +4,9 @@ const NewsTicker = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/news')
+    fetch('/db.json')
       .then(res => res.json())
-      .then(data => setNews(data));
+      .then(data => setNews(data.news));
   }, []);
 
   const newsString = news.map(item => `${item.title}`).join(' | ');

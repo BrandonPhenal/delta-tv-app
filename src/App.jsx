@@ -15,49 +15,13 @@ function App() {
   const [liveStream, setLiveStream] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/shows')
-      .then(res => res.json())
-      .then(data => setShows(data));
-    
-    fetch('http://localhost:3001/liveStream')
-      .then(res => res.json())
-      .then(data => setLiveStream(data));
-  }, []);
-
-  const addShow = (newShow) => {
-    fetch('http://localhost:3001/shows', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newShow),
-    })
-      .then(res => res.json())
-      .then(data => setShows(prevShows => [data, ...prevShows]));
-  };
-
-  const deleteShow = (showId) => {
-    fetch(`http://localhost:3001/shows/${showId}`, {
-      method: 'DELETE',
-    })
-      .then(() => {
-        setShows(prevShows => prevShows.filter(show => show.id !== showId));
-      });
-  };
-
-  const onUpdateShow = (updatedShow) => {
-    fetch(`http://localhost:3001/shows/${updatedShow.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedShow),
-    })
+    fetch('/db.json')
       .then(res => res.json())
       .then(data => {
-        setShows(prevShows => prevShows.map(show => show.id === data.id ? data : show));
+        setShows(data.shows);
+        setLiveStream(data.liveStream);
       });
-  };
+  }, []);
 
   return (
     <AuthProvider>
@@ -80,7 +44,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route 
               path="shows" 
-              element={<ShowsManager shows={shows} onAddShow={addShow} onUpdateShow={onUpdateShow} onDeleteShow={deleteShow} />} 
+              element={<ShowsManager shows={shows} />} 
             />
             <Route path="partners" element={<PartnersManager />} /> {/* Add PartnersManager route */}
           </Route>

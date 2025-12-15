@@ -7,9 +7,9 @@ const EPG = () => {
   const [selectedDay, setSelectedDay] = useState(today);
 
   useEffect(() => {
-    fetch('http://localhost:3001/shows')
+    fetch('/db.json')
       .then(res => res.json())
-      .then(data => setShows(data));
+      .then(data => setShows(data.shows));
   }, []);
 
   const getShowsForDay = (day) => {
