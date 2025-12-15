@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // New state for password visibility
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,11 +22,15 @@ const LoginPage = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-page-container">
       <div className="login-image-section">
         {/* You can add an image or other branding here */}
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDa1pLQil5GSR4pelEhgKNl6bRMsSw6M7OhA&s" alt="Delta TV Uganda" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ3DlG56cy_200K6FTm6CfwyzxocD2IDlOoQ&s" alt="Delta TV Uganda" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
       <div className="login-form-section">
         <div className="card" style={{ maxWidth: '400px', margin: 'auto' }}>
@@ -44,13 +49,32 @@ const LoginPage = () => {
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                className="form-control"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div style={{ position: 'relative' }}> {/* Wrapper for input and toggle */}
+                <input
+                  id="password"
+                  className="form-control"
+                  type={showPassword ? 'text' : 'password'} // Dynamic type
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0',
+                    color: '#007bff'
+                  }}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
             </div>
             {error && <p className="error-message">{error}</p>}
             <button type="submit" className="btn btn-primary">Log In</button>
