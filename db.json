@@ -172,6 +172,24 @@
       "name": "Eco Ventures",
       "logoUrl": "https://logowik.com/default_logo.jpg",
       "website": "https://ecoventures.com"
+    },
+    {
+      "id": 6,
+      "name": "Tech Innovators",
+      "logoUrl": "https://via.placeholder.com/150/FF0000/FFFFFF?text=TechI",
+      "website": "https://techinnovators.com"
+    },
+    {
+      "id": 7,
+      "name": "Digital Dreams",
+      "logoUrl": "https://via.placeholder.com/150/0000FF/FFFFFF?text=DigitalD",
+      "website": "https://digitaldreams.com"
+    },
+    {
+      "id": 8,
+      "name": "Green Energy Co.",
+      "logoUrl": "https://via.placeholder.com/150/008000/FFFFFF?text=GreenE",
+      "website": "https://greenenergy.com"
     }
   ]
 }
